@@ -1,26 +1,31 @@
 //import liraries
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Button } from 'react-native';
-import auth from '@react-native-firebase/auth';
+
+import Articles from  './src/Articles'
+import {AuthContext, AuthContextProvider, ThemeContextProvider} from './src/Context'
+import ThemeToggle from './src/ThemeToggle';
+import SignIn from './src/SignIn'
+import SignOut from './src/SignOut'
+import { useEffect } from 'react';
+import { useState } from 'react';
+
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
+import auth from '@react-native-firebase/auth';
 
 GoogleSignin.configure({
     webClientId: '294142720015-5cjbq3cj0acj3kjkq1mh6qv35f1nr6ju.apps.googleusercontent.com',
 });
 
 
-async function onGoogleButtonPress() {
-  // Get the users ID token
-    const { idToken } = await GoogleSignin.signIn();
 
-  // Create a Google credential with the token
-    const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+const isSignedIn = async () => {
+    const isSignedIn = await GoogleSignin.isSignedIn();
+    console.log('chut',isSignedIn)
+};
 
-  // Sign-in the user with the credential
-    return auth().signInWithCredential(googleCredential);
-}
 
-const signOut = async () => {
+const logOut = async () => {
     try {
       await GoogleSignin.revokeAccess();
       await GoogleSignin.signOut();
@@ -29,38 +34,66 @@ const signOut = async () => {
     }
   };
 
-
-function signedIn() {
-    return(
-    <View style={styles.container}>
-        <Text>App</Text>
-        <Button
-        title="Google Sign-In"
-        onPress={() => onGoogleButtonPress().then(() => console.log('Signed in with Google!'))}
-    />
-    </View>
-    )
-}
-
-function signedOut() {
-    return(
-    <View style={styles.container}>
-        <Text>
-            Signed Out
-        </Text>
-        <Button
-            title='signOut'
-            onPress={() => signOut().then(() => console.log('signedOut'))}
-        />
-    </View>
-    )
-}
+async function onGoogleButtonPress() {
+    // Get the users ID token
+      const { idToken } = await GoogleSignin.signIn();
+  
+    // Create a Google credential with the token
+      const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+  
+    // Sign-in the user with the credential
+      return auth().signInWithCredential(googleCredential);
+  }
 
 // create a component
 const App = () => {
+
+    const [isSigned, setSigned] = useState(null)
+
+    useEffect( async () => {
+        
+        setSigned(await GoogleSignin.isSignedIn())
+        console.log('useEffect',isSigned)
+    }, [])
+
+    console.log('isSigned',isSigned)
+    if(isSigned){
+        return(
+        <View style={styles.container}>
+            <Text>
+                Signed Out
+            </Text>
+            <Button
+                title='signOut'
+                onPress={() => logOut().then(() => {
+                    setSigned(!isSigned)
+                })}
+            />
+        </View>
+        )
+    }
+
+
     return (
-        // signedIn()
-        signedOut()
+        // <ThemeContextProvider>
+        //     <Articles/>
+        //     <ThemeToggle/>
+        // </ThemeContextProvider>
+        
+
+        <View>
+            <Button
+                title='test'
+                onPress={isSignedIn}
+            />
+            <Button
+                title="Google Sign-In"
+                onPress={() => onGoogleButtonPress().then(() => {
+                    setSigned(!isSigned)
+                })}
+            />
+        </View>
+
     );
 };
 
