@@ -5,11 +5,11 @@ import { ThemeContext } from './Context'
 
 // create a component
 const Articles = () => {
-    const {isLight, light, dark} = useContext(ThemeContext)
-    const theme = isLight ? light : dark
-    console.log(isLight)
+    // const {isLight, light, dark} = useContext(ThemeContext)
+    // const theme = isLight ? light : dark
+    // console.log(isLight)
     return (
-        <View style={{backgroundColor: theme.ui}}>
+        <View>
             <Text>Articles</Text>
         </View>
     );

@@ -12,6 +12,7 @@ import { useState } from 'react';
 
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import auth from '@react-native-firebase/auth';
+import {DrawerNavigation} from './src/Navigation'
 
 GoogleSignin.configure({
     webClientId: '294142720015-5cjbq3cj0acj3kjkq1mh6qv35f1nr6ju.apps.googleusercontent.com',
@@ -57,6 +58,7 @@ const App = () => {
     }, [])
 
     console.log('isSigned',isSigned)
+
     if(isSigned){
         return(
         <View style={styles.container}>
