@@ -1,7 +1,9 @@
 //import liraries
-import React, { Component } from 'react';
+import React, { Component, useContext } from 'react';
 import { View, Text, StyleSheet, Button } from 'react-native';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
+import { AuthContext } from './Context';
+
 // create a component
 GoogleSignin.configure({
     webClientId: '294142720015-5cjbq3cj0acj3kjkq1mh6qv35f1nr6ju.apps.googleusercontent.com',
@@ -18,6 +20,11 @@ const logOut = async () => {
   };
 
 const SignOut = () => {
+
+    const {isSignedIn, signedIn} = useContext(AuthContext)
+    console.log('inside signin yammm',isSignedIn)
+
+
     return (
     <View style={styles.container}>
         <Text>
@@ -25,7 +32,7 @@ const SignOut = () => {
         </Text>
         <Button
             title='signOut'
-            onPress={() => logOut().then(() => console.log('signedOut'))}
+            onPress={() => logOut().then(signedIn)}
         />
     </View>
     );

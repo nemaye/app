@@ -4,6 +4,7 @@ import { View, Text, StyleSheet, Button } from 'react-native';
 import auth from '@react-native-firebase/auth';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import { AuthContext } from './Context';
+import { useState } from 'react/cjs/react.development';
 
 GoogleSignin.configure({
     webClientId: '294142720015-5cjbq3cj0acj3kjkq1mh6qv35f1nr6ju.apps.googleusercontent.com',
@@ -23,15 +24,16 @@ async function onGoogleButtonPress() {
 // create a component
 const SignIn = () => {
 
-    const {isSignedIn} = useContext(AuthContext)
-    console.log('hhh',isSignedIn)
+    const {isSignedIn, signedIn} = useContext(AuthContext)
+    console.log('inside signin yammm',isSignedIn)
 
     return (
     <View style={styles.container}>
         <Text>App</Text>
         <Button
         title="Google Sign-In"
-        onPress={() => onGoogleButtonPress().then(() => console.log('Signed in with Google!'))}
+        // onPress={signedIn}
+        onPress={() => onGoogleButtonPress().then(signedIn)}
     />
     </View>
     );

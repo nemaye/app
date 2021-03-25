@@ -47,10 +47,16 @@ export class AuthContextProvider extends Component{
         isSignedIn: false
     }
 
+    signedIn = () => {
+        this.setState({
+            isSignedIn: !this.state.isSignedIn
+        }),
+        console.log('hakunaa')
+    }
     render(){
         return(
-            <AuthContext.Provider value={{...this.state}}>
-                {this.props.children}
+            <AuthContext.Provider value={{...this.state, signedIn: this.signedIn}}>
+                {this.props.children}   
             </AuthContext.Provider>
         )
     }

@@ -1,16 +1,18 @@
 //import liraries
 import React, { Component, useContext } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { ThemeContext } from './Context'
+import { ThemeContext, AuthContext } from './Context'
 
 // create a component
 const Articles = () => {
     // const {isLight, light, dark} = useContext(ThemeContext)
     // const theme = isLight ? light : dark
     // console.log(isLight)
+
+    const {isSignedIn, signedIn} = useContext(AuthContext)
     return (
         <View>
-            <Text>Articles</Text>
+            <Text>{isSignedIn}</Text>
         </View>
     );
 };
