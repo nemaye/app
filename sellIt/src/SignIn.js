@@ -4,6 +4,7 @@ import { View, Text, StyleSheet, Button } from 'react-native';
 import auth from '@react-native-firebase/auth';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import { AuthContext } from './Context';
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 GoogleSignin.configure({
     webClientId: '294142720015-5cjbq3cj0acj3kjkq1mh6qv35f1nr6ju.apps.googleusercontent.com',
@@ -23,15 +24,27 @@ async function onGoogleButtonPress() {
 // create a component
 const SignIn = () => {
 
-    const {isSignedIn} = useContext(AuthContext)
-    console.log('hhh',isSignedIn)
-
     return (
     <View style={styles.container}>
         <Text>App</Text>
         <Button
         title="Google Sign-In"
-        onPress={() => onGoogleButtonPress().then(() => console.log('Signed in with Google!'))}
+        onPress={() => onGoogleButtonPress().then(async (data) => {
+          try{
+            await AsyncStorage.setItem('name', JSON.stringify(data.additionalUserInfo.profile.name), (err) => {
+              if(err){
+                console.log(err)
+              }
+              else{
+                console.log('success')
+              }
+            })
+            // console.log(typeof(data.additionalUserInfo.profile.name))
+          }
+          catch (e){
+            console.log(e)
+          }
+        })}
     />
     </View>
     );

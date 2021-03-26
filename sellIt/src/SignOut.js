@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Button } from 'react-native';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 // create a component
 GoogleSignin.configure({
     webClientId: '294142720015-5cjbq3cj0acj3kjkq1mh6qv35f1nr6ju.apps.googleusercontent.com',
@@ -25,7 +26,9 @@ const SignOut = () => {
         </Text>
         <Button
             title='signOut'
-            onPress={() => logOut().then(() => console.log('signedOut'))}
+            onPress={() => logOut().then( async () => {
+                AsyncStorage.removeItem('name')
+            })}
         />
     </View>
     );

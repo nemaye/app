@@ -13,6 +13,7 @@ import { useState } from 'react';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import auth from '@react-native-firebase/auth';
 import {DrawerNavigation} from './src/Navigation'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 GoogleSignin.configure({
     webClientId: '294142720015-5cjbq3cj0acj3kjkq1mh6qv35f1nr6ju.apps.googleusercontent.com',
@@ -49,54 +50,34 @@ async function onGoogleButtonPress() {
 // create a component
 const App = () => {
 
-    const [isSigned, setSigned] = useState(null)
+    const [isLogged, setLogged] = useState(null);
 
-    useEffect( async () => {
-        
-        setSigned(await GoogleSignin.isSignedIn())
-        console.log('useEffect',isSigned)
+    useEffect(() => {
+        try{
+            const name = AsyncStorage.getItem('name')
+            console.log('name', name)
+            if(name){
+                console.log('inside name', name)
+                setLogged(true)
+            }
+            else{
+                console.log('mama',name)
+                setLogged(false)
+            }
+        } catch (e){
+            console.log(e)
+        }
     }, [])
-
-    console.log('isSigned',isSigned)
-
-    if(isSigned){
+    
+    if(isLogged){
         return(
-        <View style={styles.container}>
-            <Text>
-                Signed Out
-            </Text>
-            <Button
-                title='signOut'
-                onPress={() => logOut().then(() => {
-                    setSigned(!isSigned)
-                })}
-            />
-        </View>
+            <SignIn/>
         )
     }
 
-
-    return (
-        // <ThemeContextProvider>
-        //     <Articles/>
-        //     <ThemeToggle/>
-        // </ThemeContextProvider>
-        
-
-        <View>
-            <Button
-                title='test'
-                onPress={isSignedIn}
-            />
-            <Button
-                title="Google Sign-In"
-                onPress={() => onGoogleButtonPress().then(() => {
-                    setSigned(!isSigned)
-                })}
-            />
-        </View>
-
-    );
+    return(
+        <SignOut/>
+    )
 };
 
 // define your styles
