@@ -1,17 +1,11 @@
 //import liraries
-import React, { Component } from 'react';
-import { View, Text, StyleSheet, Button } from 'react-native';
+import React from 'react';
+import { StyleSheet } from 'react-native';
 
-import Articles from  './src/Articles'
-import {AuthContext, AuthContextProvider, ThemeContextProvider} from './src/Context'
-import ThemeToggle from './src/ThemeToggle';
+import { AuthContext } from './src/Context'
 import SignIn from './src/SignIn'
-import SignOut from './src/SignOut'
-import { useEffect, useContext } from 'react';
-import { useState } from 'react';
+import { useContext } from 'react';
 
-import { GoogleSignin } from '@react-native-google-signin/google-signin';
-import auth from '@react-native-firebase/auth';
 import {DrawerNavigation} from './src/Navigation'
 
 

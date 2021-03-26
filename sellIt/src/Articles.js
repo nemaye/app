@@ -1,7 +1,8 @@
 //import liraries
-import React, { Component, useContext } from 'react';
+import React, { useContext } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { ThemeContext, AuthContext } from './Context'
+import { AuthContext } from './Context'
+import SetProfile from './SetProfile'
 
 // create a component
 const Articles = () => {
@@ -9,12 +10,31 @@ const Articles = () => {
     // const theme = isLight ? light : dark
     // console.log(isLight)
 
-    const {isSignedIn, signedIn} = useContext(AuthContext)
-    return (
-        <View>
-            <Text>{isSignedIn}</Text>
-        </View>
-    );
+    // if(userProfileComplete){
+    //     return(
+    //         <Something/>
+    //     )
+    // }
+    // else{
+    //     return(
+    //         <SomethingElse/>
+    //     )
+    // }
+
+    if(false){
+        return (
+            <View>
+                <Text>
+                    products
+                </Text>
+            </View>
+        );
+    }
+    else{
+        return(
+            <SetProfile/>
+        )
+    }
 };
 
 // define your styles
