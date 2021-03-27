@@ -4,10 +4,10 @@ import { View, Text, StyleSheet, Modal, TextInput, Button } from 'react-native';
 import { useState } from 'react/cjs/react.development';
 
 // create a component
-const SetProfile = () => {
+const SetProfile = (props) => {
 
-    const [modal, setModal] = useState(true)
-
+    const [modal, setModal] = useState(props.openModal)
+    console.log('mdel',modal)
     return (
 
             <Modal visible={modal} animationType='slide'>

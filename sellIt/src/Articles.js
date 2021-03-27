@@ -1,7 +1,7 @@
 //import liraries
 import React, { useContext } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { useEffect } from 'react/cjs/react.development';
+import { useEffect, useState } from 'react/cjs/react.development';
 import { AuthContext } from './Context'
 import SetProfile from './SetProfile'
 
@@ -22,37 +22,30 @@ const Articles = () => {
     //     )
     // }
 
+    const [exists, setExist] = useState(false)
+
     useEffect(() => {
-        fetch("http://192.168.43.12:4000/checkProfile", {
+        fetch("http://192.168.43.12:4000/api/checkProfile", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                "email": 'yameen@gmail.com'
+                "email": 'bababab@gmail.com'
             })
         })
         .then((res) => res.json())
         .then((data) => {
             console.log('data',data)
+            setExist(true)
         })
         .catch(err => console.log(err))
-    })
+    }, [])
 
-    if(false){
-        return (
-            <View>
-                <Text>
-                    products
-                </Text>
-            </View>
-        );
-    }
-    else{
-        return(
-            <SetProfile/>
-        )
-    }
+    console.log('exists',exists)
+    return(
+        <SetProfile openModal={exists}/>
+    )
 };
 
 // define your styles
