@@ -1,33 +1,22 @@
-const express = require('express')
+const express = require('express');
+const { createProfile, checkProfile } = require('../createUser');
 const router = express.Router();
-const users = require('../connection')
 
-router.get('/', (req, res) => {
+// router.get('/', (req, res) => {
 
-    res.send({
-        type: 'GET'
-    })
-})
+//     res.send({
+//         type: 'GET'
+//     })
+// })
 
-router.post('/', (req, res) => {
-    
-    console.log(req.body)
-    users.create(req.body)
-    .then( (data) => {
-        res.send(data)
-    })
-})
+router.post('/createProfile', createProfile )
 
-router.put('/:id', (req, res) => {
-    res.send({
-        type: 'PUT'
-    })
-})
+router.post('/checkProfile', checkProfile)
 
-router.delete('/:id', (req, res) => {
-    res.send({
-        type: 'DELETE'
-    })
-})
+// router.delete('/:id', (req, res) => {
+//     res.send({
+//         type: 'DELETE'
+//     })
+// })
 
 module.exports = router

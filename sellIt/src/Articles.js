@@ -1,6 +1,7 @@
 //import liraries
 import React, { useContext } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import { useEffect } from 'react/cjs/react.development';
 import { AuthContext } from './Context'
 import SetProfile from './SetProfile'
 
@@ -20,6 +21,23 @@ const Articles = () => {
     //         <SomethingElse/>
     //     )
     // }
+
+    useEffect(() => {
+        fetch("http://192.168.43.12:4000/checkProfile", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                "email": 'yameen@gmail.com'
+            })
+        })
+        .then((res) => res.json())
+        .then((data) => {
+            console.log('data',data)
+        })
+        .catch(err => console.log(err))
+    })
 
     if(false){
         return (

@@ -11,25 +11,18 @@ const User = new Schema({
     },
     contact: {
         type: Number,
-        required: false,
+        required: true,
     },
-    productName: {
+    email: {
         type: String,
         required: true,
+        lowercase: true,
+        unique: true,
+        trim: true
     },
-    category: {
-        type: String,
-        required: true,
-    },
-    quantity: {
-        type: Number,
-        required: true,
-        default: 1
-    },
-    description: {
-        type: String,
-        required: true,
+    profilePic: {
+        type: String
     }
-});
+}, {timestamps: true});
 
-module.exports = mongoose.model('userCollection', User);
+module.exports = mongoose.model('users', User);
