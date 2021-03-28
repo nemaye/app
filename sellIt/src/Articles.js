@@ -1,6 +1,6 @@
 //import liraries
 import React, { useContext } from 'react';
-import { View, Text, StyleSheet, Modal } from 'react-native';
+import { View, Text, StyleSheet, Modal, Button } from 'react-native';
 import { useEffect, useState } from 'react/cjs/react.development';
 import { AuthContext } from './Context'
 import SetProfile from './SetProfile'
@@ -31,7 +31,7 @@ const Articles = () => {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                "email": 'gadsfdga@gmail.com'
+                "email": 'gadsfga@gmail.com'
             })
         })
         .then((res) => res.json())
@@ -42,11 +42,19 @@ const Articles = () => {
         .catch(err => console.log(err))
     }, [])
 
+    const closeModal = () => {
+        setExist(true)
+    }
+
     console.log('exists',exists)
     return(
         <View style={styles.container}>
             <Modal visible={!exists} animationType='slide'>
                 <SetProfile/>
+                <Button
+                    title='pressme'
+                    onPress={closeModal}
+                />
             </Modal>
         </View>
         // <SetProfile openModal={exists}/>
