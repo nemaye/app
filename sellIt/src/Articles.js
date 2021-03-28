@@ -1,6 +1,6 @@
 //import liraries
 import React, { useContext } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Modal } from 'react-native';
 import { useEffect, useState } from 'react/cjs/react.development';
 import { AuthContext } from './Context'
 import SetProfile from './SetProfile'
@@ -22,7 +22,7 @@ const Articles = () => {
     //     )
     // }
 
-    const [exists, setExist] = useState(false)
+    const [exists, setExist] = useState(true)
 
     useEffect(() => {
         fetch("http://192.168.43.12:4000/api/checkProfile", {
@@ -31,20 +31,25 @@ const Articles = () => {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                "email": 'bababab@gmail.com'
+                "email": 'gadsfdga@gmail.com'
             })
         })
         .then((res) => res.json())
         .then((data) => {
             console.log('data',data)
-            setExist(true)
+            setExist(data)
         })
         .catch(err => console.log(err))
     }, [])
 
     console.log('exists',exists)
     return(
-        <SetProfile openModal={exists}/>
+        <View style={styles.container}>
+            <Modal visible={!exists} animationType='slide'>
+                <SetProfile/>
+            </Modal>
+        </View>
+        // <SetProfile openModal={exists}/>
     )
 };
 

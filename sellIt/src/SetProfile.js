@@ -7,48 +7,46 @@ import { useState } from 'react/cjs/react.development';
 const SetProfile = (props) => {
 
     const [modal, setModal] = useState(props.openModal)
-    console.log('mdel',modal)
-    return (
+    console.log('modal1',modal)
+    console.log('modal2',props.openModal)
 
-            <Modal visible={modal} animationType='slide'>
-                <View style={{
-                        flex: 1,
-                        flexDirection: 'column',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        backgroundColor: '#eee'
-                }}>
-                    <Text style={{
-                        fontSize: 40,
-                        fontWeight: '400'
-                    }}>
-                        Complete Profile
-                    </Text>
-                    <View style={styles.modal}> 
-                        <TextInput 
-                            placeholder='username'
-                            style={styles.input}
-                        />
-                        <TextInput 
-                            style={styles.input}
-                            placeholder='contact number'
-                        />
-                        <TextInput 
-                            style={styles.input}
-                            placeholder='address'
-                        />
-                        <TextInput 
-                            style={styles.input}
-                            placeholder='pincode'
-                        />
-                        <Button
-                            title='press'
-                            onPress={() => setModal(false)}
-                        />
-                    </View>
-                </View>
-            </Modal>
-      
+    return (
+    <View style={{
+            flex: 1,
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+            backgroundColor: '#eee'
+    }}>
+        <Text style={{
+            fontSize: 40,
+            fontWeight: '400'
+        }}>
+            Complete Profile
+        </Text>
+        <View style={styles.modal}> 
+            <TextInput 
+                placeholder='username'
+                style={styles.input}
+            />
+            <TextInput 
+                style={styles.input}
+                placeholder='contact number'
+            />
+            <TextInput 
+                style={styles.input}
+                placeholder='address'
+            />
+            <TextInput 
+                style={styles.input}
+                placeholder='pincode'
+            />
+            <Button
+                title='press'
+                onPress={() => setModal(false)}
+            />
+        </View>
+    </View> 
     );
 };
 
