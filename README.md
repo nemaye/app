@@ -1,2 +1,2 @@
 # app
-![](project.gif =250x250)
+<img src="project.gif" width="250" height="250"/>
