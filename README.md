@@ -1,2 +1,2 @@
 # app
-![](project.gif)
+![](project.gif =250x250)
